@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Veggie GIPHY</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assetss\css\style.css" />
 </head>
 
@@ -12,125 +13,165 @@
 <body>
 
     <div class="container">
-        <h1>Veggie search</h1>
-        <div id="info"></div>
-
-
-        <!-- Buttons will get Dumped Here  -->
-        <div id="buttons-view">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="jumbotron">
+                    <h1>Veggie
+                        <span id="user-text">
+                            <strong>...Giphy</strong>
+                            <i>Search</i>
+                        </span>
+                    </h1>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <form id="veggie-form">
-            <label for="veggie-input">Add a Veggie</label>
-            <input type="text" id="veggie-input">
-            <br>
-            <input id="add-veggie" type="submit" value="Add a Veggie">
-        </form>
+    <div class="col-sm-12" id="panels">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <h3>Type in your favorite veggie to add a button, then click the button you added to see what happens!</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <!-- Buttons will get Dumped Here  -->
+                        <div id="buttons-view">
+                        </div>
+                        <br>
+
+                        <form id="veggie-form">
+                            <label for="veggie-input">Add a Veggie</label>
+                            <input type="text" id="veggie-input">
+                            <br>
+                            <br>
+                            <input id="add-veggie" type="submit" value="Add a Veggie">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <h3>Veggies!</h3>
+            </div>
+            <div class="panel-body">
+                <div id="gifs-appear-here"></div>
+
+            </div>
+        </div>
+    </div>
 
 
-        <div id="gifs-appear-here"></div>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
-            var veg = ["Carrots", "Squash","Kale", "Spinach"]
+        var veg = ["Carrots", "Squash", "Kale", "Spinach"]
 
-            function searchVeggie() {
+        function searchVeggie() {
 
-            
-            
+
+
             // $("button").on("click", function () {
 
-                // In this case, the "this" keyword refers to the button that was clicked
-                var veggie = $(this).attr("data-veg");
+            // In this case, the "this" keyword refers to the button that was clicked
+            var veggie = $(this).attr("data-veg");
 
-                // Constructing a URL to search Giphy for the name of the veg
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    veggie + "&api_key=R8MTMaG7iNy6ZcQKO8FlJ4FaWCi5C1Lf&limit=10";
+            // Constructing a URL to search Giphy for the name of the veg
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                veggie + "&api_key=R8MTMaG7iNy6ZcQKO8FlJ4FaWCi5C1Lf&limit=10";
 
-                // Performing our AJAX GET request
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                })
-                    // After the data comes back from the API
-                    .then(function (response) {
-                        // Storing an array of results in the results variable
-                        var results = response.data;
+            // Performing our AJAX GET request
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                // After the data comes back from the API
+                .then(function (response) {
+                    // Storing an array of results in the results variable
+                    var results = response.data;
 
-                        // Looping over every result item
-                        for (var i = 0; i < results.length; i++) {
+                    // Looping over every result item
+                    for (var i = 0; i < results.length; i++) {
 
-                            // Only taking action if the photo has an appropriate rating
-                            if (results[i].rating !== "r") {
-                                // Creating a div with the class "item"
-                                var gifDiv = $("<div class='item'>");
+                        // Only taking action if the photo has an appropriate rating
+                        if (results[i].rating !== "r") {
+                            // Creating a div with the class "item"
+                            var gifDiv = $("<div class='item'>");
 
-                                // Storing the result item's rating
-                                var rating = results[i].rating;
+                            // Storing the result item's rating
+                            var rating = results[i].rating;
 
-                                // Creating a paragraph tag with the result item's rating
-                                var p = $("<p>").text("Rating: " + rating);
+                            // Creating a paragraph tag with the result item's rating
+                            var p = $("<p>").text("Rating: " + rating);
 
-                                // Creating an image tag
-                                var vegImage = $("<img>");
+                            // Creating an image tag
+                            var vegImage = $("<img>");
 
-                                // Giving the image tag an src attribute of a proprty pulled off the
-                                // result item
-                                vegImage.attr("src", results[i].images.fixed_height.url);
+                            // Giving the image tag an src attribute of a proprty pulled off the
+                            // result item
+                            vegImage.attr("src", results[i].images.fixed_height.url);
 
-                                gifDiv.append(p);
-                                gifDiv.append(vegImage);
+                            gifDiv.append(p);
+                            gifDiv.append(vegImage);
 
-                                // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
-                                $("#gifs-appear-here").prepend(gifDiv);
-                            }
+                            // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+                            $("#gifs-appear-here").prepend(gifDiv);
                         }
-                    });
-            };
+                    }
+                });
+        };
 
-            // This function handles events when the ADD Veggie button is clicked
+        // This function handles events when the ADD Veggie button is clicked
 
-            $("#add-veggie").on("click", function (event) {
-                event.preventDefault();
+        $("#add-veggie").on("click", function (event) {
+            event.preventDefault();
 
-                // This line grabs the input from the textbox
-                var vegetable = $("#veggie-input").val().trim();
+            // This line grabs the input from the textbox
+            var vegetable = $("#veggie-input").val().trim();
 
-                // Adding the vegetable from the textbox to our array
-                veg.push(vegetable);
-                console.log(veg);
+            // Adding the vegetable from the textbox to our array
+            veg.push(vegetable);
+            console.log(veg);
 
-                // Calling renderButtons which handles the processing of the ve
-                renderButtons();
-            });
-
-            function renderButtons() {
-
-                $("#buttons-view").empty();
-
-                // Looping through the array of veggies
-                for (var i = 0; i < veg.length; i++) {
-
-                    // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-                    var a = $("<button>");
-                    // Adding a class of veggie to the button
-                    a.addClass("veggie");
-                    // Adding a data-attribute
-                    a.attr("data-veg", veg[i]);
-                    // Providing the initial button text
-                    a.text(veg[i]);
-                    // Adding the button to the buttons-view div
-                    $("#buttons-view").append(a);
-                }
-            }
-
-            $(document).on("click", ".veggie", searchVeggie);
+            // Calling renderButtons which handles the processing of the ve
             renderButtons();
+        });
+
+        function renderButtons() {
+
+            $("#buttons-view").empty();
+
+            // Looping through the array of veggies
+            for (var i = 0; i < veg.length; i++) {
+
+                // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+                var a = $("<button>");
+                // Adding a class of veggie to the button
+                a.addClass("veggie");
+                // Adding a data-attribute
+                a.attr("data-veg", veg[i]);
+                // Providing the initial button text
+                a.text(veg[i]);
+                // Adding the button to the buttons-view div
+                $("#buttons-view").append(a);
+            }
+        }
+
+        $(document).on("click", ".veggie", searchVeggie);
+        renderButtons();
 
 
-        </script>
+    </script>
 </body>
 
 </html>
