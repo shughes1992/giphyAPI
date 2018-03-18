@@ -1,4 +1,3 @@
-#giphyAPI
 Objective:
 Veggie Giphy! Utilizing the Giphy API to make a dynamic web page that populates with gifs of veggies. 
 
