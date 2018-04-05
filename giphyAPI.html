@@ -6,75 +6,86 @@
     <title>Veggie GIPHY</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- Bootstrap Javascript and jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </head>
 
 
 
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="jumbotron">
-                    <h1>Veggie
+                    <h2>Veggie
                         <span id="user-text">
                             <strong>...Giphy</strong>
                             <i>Search</i>
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </span>
-                    </h1>
+                    </h2>
                 </div>
             </div>
         </div>
-    
 
-    <div class="col-sm-12" id="panels">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <h3>Type in your favorite veggie to add a button, then click the button you added to see what happens!</h3>
-                    </div>
-                    <div class="panel-body">
 
-                        <!-- Buttons will get Dumped Here  -->
-                        <div id="buttons-view">
+        <div class="col-sm-12" id="panels">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <h3>Type in your favorite veggie to add a button, then click the button you added to see what
+                                    happens!
+                                </h3>
                         </div>
-                        <br>
+                        <div class="panel-body">
 
-                        <form id="veggie-form">
-                            <label for="veggie-input">Add a Veggie</label>
-                            <input type="text" id="veggie-input">
+                            <!-- Buttons will get Dumped Here  -->
+                            <div id="buttons-view">
+                            </div>
                             <br>
-                            <br>
-                            <input id="add-veggie" type="submit" value="Add a Veggie">
-                        </form>
+
+                            <form id="veggie-form">
+                                <label for="veggie-input">Add a Veggie</label>
+                                <input type="text" id="veggie-input">
+                                <br>
+                                <br>
+                                <input id="add-veggie" type="submit" value="Add a Veggie">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-sm-12">
+        <div class="col-sm-12">
 
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <h3>Veggies!</h3>
-            </div>
-            <div class="panel-body">
-                <div id="gifs-appear-here"></div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <h2>Veggies!
+                                <span class="glyphicon glyphicon-hand-down" aria-hidden="true"></span>
+                        </h2>
+                </div>
+                <div class="panel-body">
+                    <div id="gifs-appear-here"></div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+        $(document.body).css({ 'background-image': 'url(assets/images/vegetables2.jpg'})
+
 
         var veg = ["Carrots", "Squash", "Kale", "Spinach"]
 
@@ -159,6 +170,8 @@
                 var a = $("<button>");
                 // Adding a class of veggie to the button
                 a.addClass("veggie");
+                //adding bootstrap class to buttons
+                a.addClass("btn btn-default")
                 // Adding a data-attribute
                 a.attr("data-veg", veg[i]);
                 // Providing the initial button text

@@ -1,0 +1,25 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.panel-body {
+    text-align: center
+
+}
+
+.panel-title {
+    text-align: center
+}
+
+.jumbotron {
+    text-align: center;
+
+}
+
+h2 {
+    text-align: center
+}
+
